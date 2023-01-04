@@ -1,0 +1,45 @@
+<html>
+    <%- include('../_partials') %>
+    <body>
+        <%- include('../_header') %>
+        <section class="orders light-section">
+            <div class="container mx-auto pt-12">
+                <h1 class="fond-bold text-lg mb-4">All Orders</h1>
+                <% if(messages.success) { %>
+                <div id="success-alert" class="flex items-center bg-green-500 text-white tx-xm font-bold px-4 py-3">
+                    <p><%= messages.success %></p>
+                </div>
+                <% } %>
+                <table class="w-full table-auto bg-white">
+                    <thead>
+                        <tr>
+                            <th class="px-4 py-2 text-left">Order Id</th>
+                            <th class="px-4 py-2 text-left">Phone</th>
+                            <th class="px-4 py-2 text-left">Address</th>
+                            <th class="px-4 py-2 text-left">Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% if(data.length) { %>
+                            <% data.forEach((key) => { %>
+                        <tr>
+                            <td class="border px-4 py-2 "><a class="link" href="/customer/orders/<%=key._id%>"><%= key._id %></a></td>
+                            <td class="border px-4 py-2 "><%= key.phone %></td>
+                            <td class="border px-4 py-2 "><%= key.address %></td>
+                            <td class="border px-4 py-2 "><%= moment(key.createdAt).format('h:m A') %></td>
+                        </tr>
+                        <% }) %>
+                        <% } else { %>
+                            <tr>
+                                <td class="border px-4 py-2">No Orders</td>
+                            </tr>
+
+                            <% } %>
+
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </body>
+    <script src="../../js/app.js"></script>
+</html>
